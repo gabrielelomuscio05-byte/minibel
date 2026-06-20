@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh api *)",
+      "Bash(python3 -c \"import sys,json,base64; d=json.load\\(sys.stdin\\); print\\(base64.b64decode\\(d['content']\\).decode\\(\\)\\)\")",
+      "Read(//home/gabriele/**)",
+      "Bash(npx uipro-cli *)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(f\\\\\"Name: {d['name']}\\\\nDesc: {d['description']}\\\\nStars: {d['stargazers_count']}\\\\nLang: {d['language']}\\\\nLicense: {d.get\\('license',{}\\).get\\('name','none'\\)}\\\\\"\\)\")",
+      "Bash(python3 -c \"import sys,json; items=json.load\\(sys.stdin\\); [print\\(i['name'], i['type']\\) for i in items]\")",
+      "Bash(curl -fsSL https://raw.githubusercontent.com/JuliusBrussee/caveman/main/install.sh)",
+      "Bash(bash)",
+      "Bash(claude mcp *)",
+      "Bash(python3 /home/gabriele/.claude/skills/ui-ux-pro-max/scripts/search.py \"premium paint store home accessories minimalist elegant italian retail\" --design-system -p \"Colorificio\")",
+      "Bash(npm --version)",
+      "Bash(npm create *)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(npm install *)",
+      "Skill(run)",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/)",
+      "Bash(npx playwright *)",
+      "Bash(firefox --screenshot /tmp/colorificio_home.png --window-size=1440,900 http://localhost:5173/)",
+      "Bash(npm init *)",
+      "Bash(node /tmp/screenshot_sections.mjs)",
+      "Bash(python3 ui-ux-pro-max/scripts/search.py \"premium paint store italian luxury dark minimalism professional\" --design-system -p \"Colorificio Rossi\")"
+    ]
+  }
+}

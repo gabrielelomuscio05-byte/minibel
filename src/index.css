@@ -1,0 +1,319 @@
+@import "tailwindcss";
+
+:root {
+  --bg-main: #12161A;         /* Nero Lavagna - Sfondo principale predominante (60%) */
+  --bg-surface: #1E252B;      /* Grigio Grafite - Sfondo per card, sezioni, navbar e menu */
+  
+  --text-primary: #E5E9EC;     /* Bianco Ghiaccio - Testo principale per titoli e leggibilità massima */
+  --text-muted: #9CA3AF;       /* Grigio Chiaro - Testo secondario, descrizioni e label */
+  
+  --accent-cta: #FF5A5F;       /* Rosa Corallo Vivo - Accento primario (10%) per bottoni di azione e focus */
+  --accent-link: #00B4D8;      /* Turchese Elettrico - Accento secondario per icone, link e stati attivi */
+}
+
+@theme {
+  --color-bg-main: var(--bg-main);
+  --color-bg-surface: var(--bg-surface);
+  --color-text-primary: var(--text-primary);
+  --color-text-muted: var(--text-muted);
+  --color-accent-cta: var(--accent-cta);
+  --color-accent-link: var(--accent-link);
+}
+
+@layer base {
+  html, body {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--bg-main);
+    scroll-behavior: smooth;
+    color: var(--text-primary);
+    overflow-x: hidden;
+  }
+  
+  * {
+    font-family: inherit;
+  }
+}
+
+/* Custom transitions and premium design touches */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom animations for premium modern feel */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Card Fan Carousel Styles */
+.fan-layout {
+  position: relative;
+  height: 38rem; /* matching the desktop ideal height */
+  width: 100%;
+}
+@media (max-width: 1024px) {
+  .fan-layout { height: 34rem; }
+}
+@media (max-width: 768px) {
+  .fan-layout { height: 28rem; }
+}
+@media (max-width: 640px) {
+  .fan-layout { height: 26rem; }
+}
+@media (max-width: 480px) {
+  .fan-layout { height: 22rem; }
+}
+
+.fan-card {
+  position: absolute;
+  width: 15rem;
+  height: 25rem;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform-origin: bottom center;
+  background-color: #222;
+}
+
+@media (max-width: 1024px) {
+  .fan-card {
+    width: 12rem;
+    height: 20rem;
+  }
+}
+@media (max-width: 768px) {
+  .fan-card {
+    width: 10rem;
+    height: 16.5rem;
+  }
+}
+@media (max-width: 640px) {
+  .fan-card {
+    width: 8rem;
+    height: 13rem;
+    border-radius: 0.8rem;
+  }
+}
+@media (max-width: 480px) {
+  .fan-card {
+    width: 6.5rem;
+    height: 11rem;
+    border-radius: 0.75rem;
+  }
+}
+
+/* Glassmorphic premium button styling */
+.btn-glass {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  font-weight: 500;
+  user-select: none;
+}
+
+.btn-glass:hover:not(:disabled) {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+  transform: translateY(-1px);
+}
+
+.btn-glass:active:not(:disabled) {
+  opacity: 0.7;
+  transform: translateY(0);
+}
+
+.btn-glass:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-glass::before {
+  content: '';
+  position: absolute;
+  inset: 3.5px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  pointer-events: none;
+}
+
+/* ==========================================
+   UTILITY: Gradient text (coral → cyan)
+   ========================================== */
+.gradient-text {
+  background: linear-gradient(90deg, #FF5A5F 0%, #00B4D8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ==========================================
+   ANIMATION: Stats count-up reveal
+   ========================================== */
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-count-up {
+  animation: countUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ==========================================
+   ANIMATION: Infinite horizontal marquee
+   ========================================== */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* ==========================================
+   ANIMATION: Hero badge pulse border
+   ========================================== */
+@keyframes pulseBorder {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 90, 95, 0.4), 0 0 0 0 rgba(0, 180, 216, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(255, 90, 95, 0.12), 0 0 0 8px rgba(0, 180, 216, 0.05);
+  }
+}
+
+.animate-pulse-border {
+  animation: pulseBorder 2.5s ease-in-out infinite;
+}
+
+/* ==========================================
+   SCROLL REVEAL: .reveal → .reveal.visible
+   ========================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(2rem);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered delays for child elements */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ==========================================
+   PRODUCT CARD: Glow on hover
+   ========================================== */
+.card-glow:hover {
+  box-shadow: 0 0 0 1px rgba(0, 180, 216, 0.3), 0 8px 32px rgba(0, 180, 216, 0.12), 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* ==========================================
+   REDUCED MOTION: Respect user preference
+   ========================================== */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-count-up,
+  .animate-pulse-border {
+    animation: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Scroll-Reel Testimonials Animations */
+@keyframes scrollReelRise {
+  from {
+    opacity: 0;
+    transform: translateY(0.25em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scroll-reel-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.25em);
+  animation: scrollReelRise 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes scrollReelFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+.scroll-reel-exit {
+  animation: scrollReelFadeOut 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
