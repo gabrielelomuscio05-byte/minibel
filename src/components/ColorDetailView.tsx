@@ -847,29 +847,24 @@ export default function ColorDetailView({ onBack, colors, selectedColor, onSelec
                   <Info className="w-4 h-4 text-accent-link" />
                   Specifiche Tecniche & Resa
                 </h4>
-                <div className="grid grid-cols-2 gap-y-4 gap-x-6 text-sm">
-                  <div className="flex justify-between border-b border-white/5 pb-2">
-                    <span className="text-text-muted">Resa Teorica:</span>
-                    <span className="font-medium text-text-primary">{selectedColor.properties.coverage}</span>
-                  </div>
-                  <div className="flex justify-between border-b border-white/5 pb-2">
-                    <span className="text-text-muted">Diluizione:</span>
-                    <span className="font-medium text-text-primary">{selectedColor.properties.dilution}</span>
-                  </div>
-                  <div className="flex justify-between border-b border-white/5 pb-2">
-                    <span className="text-text-muted">Asciugatura:</span>
-                    <span className="font-medium text-text-primary">{selectedColor.properties.drying}</span>
-                  </div>
-                  <div className="flex justify-between border-b border-white/5 pb-2">
-                    <span className="text-text-muted">Classe VOC:</span>
-                    <span className="font-medium text-text-primary">{selectedColor.properties.voc}</span>
-                  </div>
+                <div className="grid grid-cols-2 gap-x-6 gap-y-4 text-sm">
+                  {[
+                    { label: 'Resa Teorica', value: selectedColor.properties.coverage },
+                    { label: 'Diluizione', value: selectedColor.properties.dilution },
+                    { label: 'Asciugatura', value: selectedColor.properties.drying },
+                    { label: 'Classe VOC', value: selectedColor.properties.voc },
+                  ].map(({ label, value }) => (
+                    <div key={label} className="flex flex-col gap-1 border-b border-white/5 pb-3">
+                      <span className="text-[11px] uppercase tracking-wider text-text-muted">{label}</span>
+                      <span className="font-medium text-text-primary leading-snug">{value}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
 
             {/* Bottom Actions */}
-            <div className="flex items-center space-x-4 pt-6 border-t border-white/5">
+            <div className="flex items-center pt-6 border-t border-white/5">
               {/* Formato Selection */}
               <div className="flex items-center space-x-2 border border-white/5 rounded-full px-3 py-1 bg-bg-main">
                 {(['1L', '5L', '14L'] as const).map((s) => (
@@ -877,8 +872,8 @@ export default function ColorDetailView({ onBack, colors, selectedColor, onSelec
                     key={s}
                     onClick={() => setSize(s)}
                     className={`w-10 h-10 rounded-full text-xs font-semibold transition-all duration-200 focus:outline-none cursor-pointer ${
-                      size === s 
-                        ? 'bg-bg-surface text-text-primary border border-white/5' 
+                      size === s
+                        ? 'bg-bg-surface text-text-primary border border-white/5'
                         : 'text-text-muted hover:text-text-primary'
                     }`}
                   >
@@ -886,25 +881,12 @@ export default function ColorDetailView({ onBack, colors, selectedColor, onSelec
                   </button>
                 ))}
               </div>
-
-              {/* Order / Contact CTA */}
-              <button 
-                onClick={() => {
-                  const contactsSection = document.getElementById('contatti');
-                  if (contactsSection) {
-                    contactsSection.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-                className="bg-accent-cta text-bg-main hover:opacity-90 transition-all font-semibold flex-1 py-4 px-6 rounded-full text-base shadow-lg shadow-black/20 cursor-pointer text-center"
-              >
-                Contattaci per {selectedColor.name}
-              </button>
             </div>
           </div>
         </div>
 
         {/* Ventaglio Colori Interactive Carousel */}
-        <div className="mt-24 border-t border-white/5 pt-16 text-center">
+        <div className="hidden md:block mt-24 border-t border-white/5 pt-16 text-center">
           <span className="text-sm font-semibold uppercase tracking-wider text-text-muted block mb-3">
             La Collezione Cromatica
           </span>

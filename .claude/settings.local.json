@@ -23,7 +23,8 @@
       "Bash(firefox --screenshot /tmp/colorificio_home.png --window-size=1440,900 http://localhost:5173/)",
       "Bash(npm init *)",
       "Bash(node /tmp/screenshot_sections.mjs)",
-      "Bash(python3 ui-ux-pro-max/scripts/search.py \"premium paint store italian luxury dark minimalism professional\" --design-system -p \"Colorificio Rossi\")"
+      "Bash(python3 ui-ux-pro-max/scripts/search.py \"premium paint store italian luxury dark minimalism professional\" --design-system -p \"Colorificio Rossi\")",
+      "Bash(npx tsc *)"
     ]
   }
 }

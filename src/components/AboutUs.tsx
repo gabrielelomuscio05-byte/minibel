@@ -46,7 +46,8 @@ export default function AboutUs() {
 
         {/* Timeline Strip */}
         <div className={`reveal ${visible ? 'visible' : ''} mb-16`}>
-          <div className="relative flex items-start justify-between max-w-2xl">
+          {/* Desktop Timeline (Horizontal) */}
+          <div className="hidden md:flex relative items-start justify-between max-w-2xl">
             {/* Connecting line */}
             <div className="absolute top-3.5 left-4 right-4 h-px bg-gradient-to-r from-accent-cta via-accent-link to-accent-link/30" />
 
@@ -66,6 +67,35 @@ export default function AboutUs() {
                   {m.year}
                 </span>
                 <span className="text-xs text-text-muted mt-0.5 leading-tight max-w-[80px]">{m.label}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile Timeline (Vertical) */}
+          <div className="flex md:hidden flex-col space-y-6 relative max-w-xs">
+            {/* Connecting vertical line */}
+            <div className="absolute left-[13px] top-3 bottom-3 w-px bg-gradient-to-b from-accent-cta via-accent-link to-accent-link/30" />
+
+            {MILESTONES.map((m, i) => (
+              <div key={i} className="relative flex items-center z-10 space-x-4">
+                {/* Dot */}
+                <div
+                  className={`w-7 h-7 rounded-full border-2 flex items-center justify-center transition-colors shrink-0 ${
+                    m.active
+                      ? 'bg-accent-cta border-accent-cta shadow-lg shadow-accent-cta/30'
+                      : 'bg-bg-surface border-white/20'
+                  }`}
+                >
+                  <div className={`w-2 h-2 rounded-full ${m.active ? 'bg-white' : 'bg-text-muted'}`} />
+                </div>
+                
+                {/* Text Group */}
+                <div className="flex flex-col text-left">
+                  <span className={`text-sm font-bold ${m.active ? 'gradient-text' : 'text-text-primary'}`}>
+                    {m.year}
+                  </span>
+                  <span className="text-xs text-text-muted leading-tight">{m.label}</span>
+                </div>
               </div>
             ))}
           </div>

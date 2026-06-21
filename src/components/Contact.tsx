@@ -184,6 +184,60 @@ export default function Contact() {
             )}
           </div>
         </div>
+
+        {/* Social icons */}
+        <div className="mt-16 pt-8 border-t border-white/5 flex items-center gap-3">
+          {[
+            {
+              label: 'Facebook',
+              href: '#',
+              path: 'M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z',
+              viewBox: '0 0 24 24',
+              filled: true,
+            },
+            {
+              label: 'Instagram',
+              href: '#',
+              path: null,
+              viewBox: '0 0 24 24',
+              filled: false,
+              instagram: true,
+            },
+            {
+              label: 'Twitter / X',
+              href: '#',
+              path: 'M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z',
+              viewBox: '0 0 24 24',
+              filled: false,
+            },
+            {
+              label: 'LinkedIn',
+              href: '#',
+              path: 'M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z M4 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4z',
+              viewBox: '0 0 24 24',
+              filled: false,
+            },
+          ].map(({ label, href, path, viewBox, filled, instagram }) => (
+            <a
+              key={label}
+              href={href}
+              aria-label={label}
+              className="w-10 h-10 rounded-full bg-bg-surface border border-white/5 flex items-center justify-center text-text-muted hover:text-accent-link hover:border-accent-link/30 transition-colors duration-200 focus:outline-none"
+            >
+              <svg className="w-4 h-4" viewBox={viewBox} fill={filled ? 'currentColor' : 'none'} stroke={filled ? 'none' : 'currentColor'} strokeWidth={filled ? undefined : 2} strokeLinecap="round" strokeLinejoin="round">
+                {instagram ? (
+                  <>
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                  </>
+                ) : (
+                  <path d={path!} />
+                )}
+              </svg>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   );

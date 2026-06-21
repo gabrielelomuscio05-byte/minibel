@@ -24,26 +24,26 @@ export default function Hero({ onExploreProducts }: HeroProps) {
       <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-bg-main z-10 pointer-events-none" />
 
       {/* Hero Content */}
-      <div className="relative z-10 max-w-4xl px-6 py-32 flex flex-col items-center animate-fade-in text-text-primary">
+      <div className="relative z-10 max-w-4xl px-4 sm:px-6 py-24 sm:py-32 flex flex-col items-center animate-fade-in text-text-primary">
 
         {/* Animated Rating Badge */}
-        <div className="animate-pulse-border mb-8 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm text-sm font-medium text-text-primary">
-          <span className="text-yellow-400 text-base leading-none">★</span>
+        <div className="animate-pulse-border mb-6 sm:mb-8 inline-flex items-center gap-2 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm text-xs sm:text-sm font-medium text-text-primary">
+          <span className="text-yellow-400 text-sm sm:text-base leading-none">★</span>
           <span>4.9 · Oltre 5.000 Clienti Soddisfatti</span>
         </div>
 
         {/* Headline */}
         <h1
-          className="text-5xl md:text-7xl font-light leading-tight mb-8 tracking-tight text-text-primary"
+          className="text-3xl xs:text-4xl sm:text-6xl md:text-7xl font-light leading-[1.15] sm:leading-tight mb-6 sm:mb-8 tracking-tight text-text-primary text-center"
           style={{ letterSpacing: '-0.04em' }}
         >
           L'arte di{' '}
           <span className="gradient-text font-medium">colorare</span>
-          <br className="hidden md:inline" />
+          <br className="hidden sm:inline" />
           {' '}i tuoi spazi
         </h1>
 
-        <p className="text-text-muted text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed font-light">
+        <p className="text-text-muted text-sm sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed font-light">
           Da oltre trent'anni selezioniamo le migliori vernici, porte interne, prati sintetici e accessori per la casa. Soluzioni d'arredo e finiture di pregio progettate per dare nuova luce e carattere ad ogni vostro ambiente.
         </p>
 

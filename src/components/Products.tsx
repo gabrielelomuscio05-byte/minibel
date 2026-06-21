@@ -151,7 +151,7 @@ export default function Products({ onSelectVernici, onSelectCategory }: Products
                       {category.badge}
                     </span>
                   )}
-                  <div className="w-9 h-9 rounded-full bg-bg-main flex items-center justify-center border border-white/5 opacity-0 transform translate-x-[-8px] transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 shadow-sm">
+                  <div className="w-9 h-9 rounded-full bg-bg-main flex items-center justify-center border border-white/5 transition-all duration-300 opacity-100 translate-x-0 md:opacity-0 md:translate-x-[-8px] md:group-hover:opacity-100 md:group-hover:translate-x-0 shadow-sm">
                     <ArrowRight className="w-4 h-4 text-accent-link" />
                   </div>
                 </div>

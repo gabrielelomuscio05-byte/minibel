@@ -7,7 +7,6 @@ import type { PaintColor } from './components/ColorDetailView';
 import AboutUs from './components/AboutUs';
 import Contact from './components/Contact';
 import { Sparkles } from 'lucide-react';
-import { StackedCircularFooter } from '@/components/ui/stacked-circular-footer';
 import { ScrollReelTestimonials } from '@/components/ui/scroll-reel-testimonials';
 import Stats from './components/Stats';
 
@@ -236,20 +235,12 @@ export default function App() {
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4">
-                  <button 
-                    onClick={() => handleNavigation('contatti')}
-                    className="btn-glass px-6 py-3 text-xs text-white"
-                  >
-                    Contattaci
-                  </button>
-                  <button 
-                    onClick={() => setSelectedCategoryInfo(null)}
-                    className="text-stone-450 hover:text-white text-xs font-semibold uppercase tracking-wider focus:outline-none cursor-pointer"
-                  >
-                    Chiudi
-                  </button>
-                </div>
+                <button
+                  onClick={() => setSelectedCategoryInfo(null)}
+                  className="text-stone-450 hover:text-white text-xs font-semibold uppercase tracking-wider focus:outline-none cursor-pointer flex-shrink-0"
+                >
+                  Chiudi
+                </button>
               </div>
             </div>
           )}
@@ -288,8 +279,6 @@ export default function App() {
         </main>
       )}
 
-      {/* Footer */}
-      <StackedCircularFooter />
     </div>
   );
 }

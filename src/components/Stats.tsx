@@ -95,10 +95,24 @@ export default function Stats() {
       <div className="absolute inset-0 bg-gradient-to-r from-accent-cta/5 via-transparent to-accent-link/5 pointer-events-none" />
 
       <div className="max-w-[88rem] mx-auto">
-        <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/5 divide-y lg:divide-y-0">
-          {STATS.map((stat, i) => (
-            <StatCard key={i} stat={stat} active={visible} />
-          ))}
+        <div className="grid grid-cols-2 lg:grid-cols-4">
+          {STATS.map((stat, i) => {
+            let borderClasses = "border-white/5";
+            if (i === 0) {
+              borderClasses += " border-r border-b lg:border-b-0";
+            } else if (i === 1) {
+              borderClasses += " border-b lg:border-r lg:border-b-0";
+            } else if (i === 2) {
+              borderClasses += " border-r border-b-0 lg:border-r";
+            } else if (i === 3) {
+              borderClasses += " border-b-0";
+            }
+            return (
+              <div key={i} className={borderClasses}>
+                <StatCard stat={stat} active={visible} />
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
