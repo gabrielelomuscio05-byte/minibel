@@ -14,6 +14,15 @@ const makeSvgColorCard = (hex: string, name: string) => {
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 };
 
+const getContrastColor = (hex: string) => {
+  const color = hex.replace('#', '');
+  const r = parseInt(color.substring(0, 2), 16);
+  const g = parseInt(color.substring(2, 4), 16);
+  const b = parseInt(color.substring(4, 6), 16);
+  const yiq = (r * 299 + g * 587 + b * 114) / 1000;
+  return yiq >= 128 ? '#000000' : '#ffffff';
+};
+
 export interface PaintColor {
   id: string;
   name: string;
@@ -32,9 +41,10 @@ interface ColorDetailViewProps {
   colors: PaintColor[];
   selectedColor: PaintColor;
   onSelectColor: (color: PaintColor) => void;
+  onContact: (colorName: string) => void;
 }
 
-export default function ColorDetailView({ onBack, colors, selectedColor, onSelectColor }: ColorDetailViewProps) {
+export default function ColorDetailView({ onBack, colors, selectedColor, onSelectColor, onContact }: ColorDetailViewProps) {
   const [finish, setFinish] = useState<'opaca' | 'satinata' | 'lucida'>('opaca');
   const [useCase, setUseCase] = useState<'interno' | 'esterno'>('interno');
   const [size, setSize] = useState<'1L' | '5L' | '14L'>('5L');
@@ -864,9 +874,9 @@ export default function ColorDetailView({ onBack, colors, selectedColor, onSelec
             </div>
 
             {/* Bottom Actions */}
-            <div className="flex items-center pt-6 border-t border-white/5">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-6 border-t border-white/5">
               {/* Formato Selection */}
-              <div className="flex items-center space-x-2 border border-white/5 rounded-full px-3 py-1 bg-bg-main">
+              <div className="flex items-center space-x-2 border border-white/5 rounded-full px-3 py-1 bg-bg-main self-start">
                 {(['1L', '5L', '14L'] as const).map((s) => (
                   <button
                     key={s}
@@ -881,6 +891,18 @@ export default function ColorDetailView({ onBack, colors, selectedColor, onSelec
                   </button>
                 ))}
               </div>
+
+              {/* Contattaci Button */}
+              <button
+                onClick={() => onContact(selectedColor.name)}
+                style={{
+                  backgroundColor: selectedColor.hex,
+                  color: getContrastColor(selectedColor.hex),
+                }}
+                className="flex-grow py-3 px-6 rounded-full font-semibold text-center transition-all duration-300 hover:opacity-90 shadow-lg cursor-pointer text-sm focus:outline-none"
+              >
+                Contattaci per {selectedColor.name}
+              </button>
             </div>
           </div>
         </div>
@@ -900,6 +922,23 @@ export default function ColorDetailView({ onBack, colors, selectedColor, onSelec
           <div className="w-full overflow-hidden">
             <SocialCards cards={carouselCards} />
           </div>
+        </div>
+
+        {/* Bottom Page CTA */}
+        <div className="mt-16 border-t border-white/5 pt-12 text-center flex flex-col items-center">
+          <p className="text-text-muted text-sm mb-4">
+            Vuoi ordinare questa tonalità o richiedere una consulenza dedicata?
+          </p>
+          <button
+            onClick={() => onContact(selectedColor.name)}
+            style={{
+              backgroundColor: selectedColor.hex,
+              color: getContrastColor(selectedColor.hex),
+            }}
+            className="py-4 px-8 rounded-full font-semibold text-center transition-all duration-300 hover:opacity-90 shadow-lg cursor-pointer text-base focus:outline-none"
+          >
+            Contattaci per {selectedColor.name}
+          </button>
         </div>
       </div>
     </div>

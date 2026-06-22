@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle2 } from 'lucide-react';
 
-export default function Contact() {
+interface ContactProps {
+  prefilledMessage?: string;
+}
+
+export default function Contact({ prefilledMessage }: ContactProps) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: '',
+    message: prefilledMessage || '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (prefilledMessage) {
+      setFormData((prev) => ({ ...prev, message: prefilledMessage }));
+    }
+  }, [prefilledMessage]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Products from './components/Products';
@@ -120,9 +120,44 @@ const PAINT_COLORS: PaintColor[] = [
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
-  const [viewState, setViewState] = useState<'main' | 'vernici-detail'>('main');
+  const [viewState, setViewState] = useState<'main' | 'vernici-detail'>(() => {
+    return window.location.hash === '#vernici' ? 'vernici-detail' : 'main';
+  });
   const [selectedColor, setSelectedColor] = useState<PaintColor>(PAINT_COLORS[0]);
   const [selectedCategoryInfo, setSelectedCategoryInfo] = useState<string | null>(null);
+  const [contactPrefilledMessage, setContactPrefilledMessage] = useState('');
+
+  const hasNavigatedFromMain = useRef(false);
+
+  const handleContactColor = (colorName: string) => {
+    setContactPrefilledMessage(`Salve, vorrei ricevere maggiori informazioni o un preventivo per l'idropittura colore ${colorName}.`);
+    handleNavigation('contatti');
+  };
+
+  // Sync viewState with browser history / popstate
+  useEffect(() => {
+    // Set initial state representation in history if hash exists on load
+    if (window.location.hash === '#vernici') {
+      window.history.replaceState({ view: 'vernici-detail' }, '', '#vernici');
+    } else {
+      window.history.replaceState({ view: 'main' }, '', ' ');
+    }
+
+    const handlePopState = (event: PopStateEvent) => {
+      if (event.state && event.state.view === 'vernici-detail') {
+        setViewState('vernici-detail');
+      } else if (window.location.hash === '#vernici') {
+        setViewState('vernici-detail');
+      } else {
+        setViewState('main');
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
 
   // Monitor scroll for Scroll-Spy
   useEffect(() => {
@@ -158,6 +193,10 @@ export default function App() {
     if (viewState === 'vernici-detail') {
       // Transition back to main page
       setViewState('main');
+      // Clean up hash/state in history
+      if (window.location.hash === '#vernici') {
+        window.history.pushState({ view: 'main' }, '', window.location.pathname + window.location.search);
+      }
       // Wait for React to render main page before scrolling
       setTimeout(() => {
         const el = document.getElementById(sectionId);
@@ -178,6 +217,17 @@ export default function App() {
     setViewState('vernici-detail');
     setSelectedCategoryInfo(null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    hasNavigatedFromMain.current = true;
+    window.history.pushState({ view: 'vernici-detail' }, '', '#vernici');
+  };
+
+  const handleBackToMain = () => {
+    if (hasNavigatedFromMain.current) {
+      window.history.back();
+    } else {
+      setViewState('main');
+      window.history.pushState({ view: 'main' }, '', window.location.pathname + window.location.search);
+    }
   };
 
   const handleSelectOtherCategory = (catId: string) => {
@@ -265,16 +315,17 @@ export default function App() {
           </section>
 
           {/* 6. Contatti Section */}
-          <Contact />
+          <Contact prefilledMessage={contactPrefilledMessage} />
         </main>
       ) : (
         <main className="flex-grow pt-16">
           {/* 4. Vernici Detail View (Interactive Color Page) */}
           <ColorDetailView
-            onBack={() => setViewState('main')}
+            onBack={handleBackToMain}
             colors={PAINT_COLORS}
             selectedColor={selectedColor}
             onSelectColor={setSelectedColor}
+            onContact={handleContactColor}
           />
         </main>
       )}

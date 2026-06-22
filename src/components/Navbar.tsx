@@ -55,30 +55,17 @@ export default function Navbar({ onNavigate, activeSection }: NavbarProps) {
             onClick={() => handleItemClick('home')}
             className="flex items-center space-x-3 group cursor-pointer focus:outline-none"
           >
-            <svg
-              className="w-8 h-8 transition-transform duration-300 group-hover:scale-110"
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <linearGradient id="dropGrad" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#FF5A5F" />
-                  <stop offset="100%" stopColor="#00B4D8" />
-                </linearGradient>
-              </defs>
-              <path
-                d="M16 3 C16 3, 7 14, 7 20 C7 24.97 11.03 29 16 29 C20.97 29 25 24.97 25 20 C25 14 16 3 16 3Z"
-                fill="url(#dropGrad)"
-              />
-              <ellipse cx="13" cy="17" rx="2.5" ry="4" fill="white" fillOpacity="0.25" transform="rotate(-15 13 17)" />
-            </svg>
+            <img
+              src={minibel}
+              alt="Minibel Group Logo"
+              className="w-8 h-8 object-contain transition-transform duration-300 group-hover:scale-110"
+            />
             <span
               className={`text-2xl font-medium tracking-tight transition-colors duration-200 ${
                 scrolled ? 'text-text-primary' : 'text-text-primary group-hover:text-accent-link'
               }`}
             >
-              Colorificio
+              Minibel_Group
             </span>
           </button>
 
